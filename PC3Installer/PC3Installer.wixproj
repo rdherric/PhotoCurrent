@@ -1,0 +1,74 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.0</ProductVersion>
+    <ProjectGuid>{bf7104bf-0826-4162-8eda-4af3daf0971a}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>PC3Installer</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\RDH2\trunk\RDH2.Install\RDH2.Install.csproj">
+      <Name>RDH2.Install</Name>
+      <Project>{2780d88a-7a2b-4b35-bf54-39bb98544e94}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\RDH2\trunk\RDH2.Instrumentation\RDH2.Instrumentation.csproj">
+      <Name>RDH2.Instrumentation</Name>
+      <Project>{17cd90f5-bb6a-4dc5-82e0-cae7c5471508}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\RDH2\trunk\RDH2.Utilities\RDH2.Utilities.csproj">
+      <Name>RDH2.Utilities</Name>
+      <Project>{f0a9386d-de94-48e7-8447-bbc7682f3771}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\PhotoCurrent.IO\PhotoCurrent.IO.csproj">
+      <Name>PhotoCurrent.IO</Name>
+      <Project>{5856ddd0-d6d9-48e2-9c8b-1fb7fb5ab825}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\PhotoCurrent.Scaling\PhotoCurrent.Scaling.csproj">
+      <Name>PhotoCurrent.Scaling</Name>
+      <Project>{83316c8c-a9c9-4516-a8a9-64b3e172ce0e}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\PhotoCurrent\PhotoCurrent.csproj">
+      <Name>PhotoCurrent</Name>
+      <Project>{0e9f9a01-4322-44c1-8aeb-c68a54fa7ea0}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Windows Installer XML v3\bin\setupbld.exe" -title "PhotoCurrent v3 Installer" -msu "$(ProjectDir)$(OutDir)$(TargetFileName)" -setup "C:\Program Files (x86)\Windows Installer XML v3\bin\setup.exe" -out "$(ProjectDir)$(OutDir)PC3Setup.EXE"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

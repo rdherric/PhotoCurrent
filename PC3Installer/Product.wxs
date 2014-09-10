@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+  <!-- Defines to cut down on Typing -->
+  <?define PC3Name="PhotoCurrent v3" ?>
+  <?define PC3Manufacturer="RDH2 Science" ?>
+  <?define PC3Description="Installs the PhotoCurrent v3 Application" ?>
+  <?define PC3CurrVersion="3.2.7" ?>
+  <?define PC3MinVersion="3.0.0" ?>
+  <?define PC3ID="12331083-7CAA-456c-B58E-1FCB19D5EBF8" ?>
+  <?define PC3UpgradeCode="DC9AAC03-59E4-4AAA-A358-5A9DA03D687C" ?>
+  <?define PC3AppRegPath="Software\RDH2 Science\PhotoCurrent v3" ?>
+
+  <!-- Product Element - defines the product to be installed and upgraded -->
+	<Product Id="$(var.PC3ID)" Name="$(var.PC3Name)" Language="1033" Version="$(var.PC3CurrVersion)" 
+           Manufacturer="$(var.PC3Manufacturer)" UpgradeCode="$(var.PC3UpgradeCode)">
+
+    <!-- Package Element - defines the properties of the current MSI -->
+    <Package InstallerVersion="200" Compressed="yes" AdminImage="no" Description="$(var.PC3Description)" Comments="$(var.PC3Description)" 
+             Languages="1033" InstallScope="perMachine" Manufacturer="$(var.PC3Manufacturer)" />
+
+    <!-- Upgrade Information -->
+    <Upgrade Id="$(var.PC3UpgradeCode)">
+      <UpgradeVersion Property="NEWPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="no" Minimum="$(var.PC3CurrVersion)" Language="1033" />
+      <UpgradeVersion Property="UPGRADEFOUND" Maximum="$(var.PC3CurrVersion)" IncludeMaximum="no" Minimum="$(var.PC3MinVersion)" IncludeMinimum="yes" Language="1033" />
+    </Upgrade>
+
+    <!-- Media Element - the CAB files into which files get compressed.  Ends up embedded in the MSI. -->
+		<Media Id="1" Cabinet="media.cab" EmbedCab="yes" />
+    
+    <!-- Directory structure of the Application -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIR" Name="$(var.PC3Name)" />
+			</Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ShortcutFolder" Name="$(var.PC3Name)" />
+      </Directory>
+      <Directory Id="DesktopFolder">
+        <Directory Id="BackgroundFolder" Name="Background" />
+      </Directory>
+		</Directory>
+
+    <!-- The files to be installed to run PhotoCurrent v3 -->
+    <DirectoryRef Id="APPLICATIONROOTDIR">
+      <Component Id="$(var.PhotoCurrent.TargetName)" Guid="2248E071-2992-4f3f-BF17-B9FD43D0F044">
+        <File Id="$(var.PhotoCurrent.TargetName)" Name="$(var.PhotoCurrent.TargetFileName)" Source="$(var.PhotoCurrent.TargetPath)" DiskId="1" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="$(var.PhotoCurrent.IO.TargetName)" Guid="4B07AEE6-E529-4c36-8630-1E4EB7C587ED">
+        <File Id="$(var.PhotoCurrent.IO.TargetName)" Name="$(var.PhotoCurrent.IO.TargetFileName)" Source="$(var.PhotoCurrent.IO.TargetPath)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.PhotoCurrent.Scaling.TargetName)" Guid="1AA68230-AB46-47c1-9E77-FC170212CF67">
+        <File Id="$(var.PhotoCurrent.Scaling.TargetName)" Name="$(var.PhotoCurrent.Scaling.TargetFileName)" Source="$(var.PhotoCurrent.Scaling.TargetPath)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.RDH2.Instrumentation.TargetName)" Guid="27DFCD9E-A792-42fd-B1CE-2A38652CDC9E">
+        <File Id="$(var.RDH2.Instrumentation.TargetName)" Name="$(var.RDH2.Instrumentation.TargetFileName)" Source="$(var.RDH2.Instrumentation.TargetPath)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="$(var.RDH2.Utilities.TargetName)" Guid="914AAA6C-CD82-4b6a-9540-068E27FDADD7">
+        <File Id="$(var.RDH2.Utilities.TargetName)" Name="$(var.RDH2.Utilities.TargetFileName)" Source="$(var.RDH2.Utilities.TargetPath)" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="DundasWinChart.DLL" Guid="A786FF2F-E04A-4e33-BED7-71D5085B7102">
+        <File Id="DundasWinChart.DLL" Name="DundasWinChart.DLL" Source="$(var.PhotoCurrent.TargetDir)DundasWinChart.DLL" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="Divelements.WizardFramework.DLL" Guid="9D53CA5A-96E9-4a9c-8EF8-1C38BFD30A31">
+        <File Id="Divelements.WizardFramework.DLL" Name="Divelements.WizardFramework.DLL" Source="$(var.PhotoCurrent.TargetDir)Divelements.WizardFramework.DLL" DiskId="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- The Start Menu Shortcut -->
+    <DirectoryRef Id="ShortcutFolder">
+      <Component Id="$(var.PhotoCurrent.TargetName)StartShortcut" Guid="FAE228E2-FE0D-4038-BFD8-6CD0AEFA8B15">
+        <Shortcut Id="$(var.PhotoCurrent.TargetName)StartShortcut" Name="$(var.PC3Name)" Description="$(var.PC3Name)" 
+                  Target="[APPLICATIONROOTDIR]$(var.PhotoCurrent.TargetFileName)" />
+        <RemoveFolder Id="$(var.PhotoCurrent.TargetName)Remove" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="$(var.PC3AppRegPath)" Name="InstallDir" KeyPath="yes" Type="string" Value="[APPLICATIONROOTDIR]" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- The Shortcut on the Desktop -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="$(var.PhotoCurrent.TargetName)DesktopShortcut" Guid="6EDA5D5C-ECBA-4c58-BE11-A357CCC7E3B4">
+        <CreateFolder />
+        <Shortcut Id="$(var.PhotoCurrent.TargetName)DesktopShortcut" Name="$(var.PC3Name)" Description="$(var.PC3Name)"
+                  Target="[APPLICATIONROOTDIR]$(var.PhotoCurrent.TargetFileName)" />
+        <RegistryValue Root="HKCU" Key="$(var.PC3AppRegPath)" Name="InstallDir" KeyPath="yes" Type="string" Value="[APPLICATIONROOTDIR]" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- The Background Folder on the Desktop -->
+    <DirectoryRef Id="BackgroundFolder">
+      <Component Id="BackgroundFolder" Guid="FB8261E8-9CDB-4f43-9546-2AF89DDDC187">
+        <CreateFolder />
+        <RemoveFolder Id="BackgroundRemove" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="$(var.PC3AppRegPath)" Name="BackgroundDir" KeyPath="yes" Type="string" Value="[BackgroundFolder]" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Feature Element - defines what operations to perform -->
+    <Feature Id="$(var.SolutionName)" Title="$(var.PC3Name)" Level="1">
+			<ComponentRef Id="$(var.PhotoCurrent.TargetName)" />
+      <ComponentRef Id="$(var.PhotoCurrent.IO.TargetName)"/>
+      <ComponentRef Id="$(var.PhotoCurrent.Scaling.TargetName)"/>
+      <ComponentRef Id="$(var.RDH2.Instrumentation.TargetName)"/>
+      <ComponentRef Id="$(var.RDH2.Utilities.TargetName)"/>
+      <ComponentRef Id="DundasWinChart.DLL" />
+      <ComponentRef Id="Divelements.WizardFramework.DLL" />
+      <ComponentRef Id="$(var.PhotoCurrent.TargetName)StartShortcut" />
+      <ComponentRef Id="$(var.PhotoCurrent.TargetName)DesktopShortcut" />
+      <ComponentRef Id="BackgroundFolder" />
+    </Feature>
+    
+    <!-- Custom Action to prevent downgrading -->
+    <CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+    
+    <!-- Custom Action to backup existing installations -->
+    <Binary Id="$(var.RDH2.Install.TargetName)" SourceFile="$(var.RDH2.Install.TargetDir)$(var.RDH2.Install.TargetName).CA.DLL" />
+    <CustomAction Id="BackupExisting" BinaryKey="$(var.RDH2.Install.TargetName)" DllEntry="BackupDirectory" Return="check" />
+
+    <!-- Schedule the Custom Actions -->
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <Custom Action="BackupExisting" After="PreventDowngrading" />
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>    
+    
+    <!-- Reference to the UI -->
+    <UIRef Id="WixUI_Minimal" />
+
+  </Product>
+</Wix>

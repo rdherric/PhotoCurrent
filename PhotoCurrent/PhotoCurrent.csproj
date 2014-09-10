@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E9F9A01-4322-44C1-8AEB-C68A54FA7EA0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PhotoCurrent</RootNamespace>
+    <AssemblyName>PhotoCurrent</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>PCLogo.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Divelements.WizardFramework, Version=1.1.2.1, Culture=neutral, PublicKeyToken=75b7ec17dd7c14c3, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DundasWinChart, Version=7.1.0.1810, Culture=neutral, PublicKeyToken=a4c03dce5db22406, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Dundas Software\Charting\WinControlVS2010\bin\DundasWinChart.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Acquisition\Spectrum2D.cs" />
+    <Compile Include="Acquisition\Spectrum3D.cs" />
+    <Compile Include="Acquisition\SpectrumBase.cs" />
+    <Compile Include="Config\AcquisitionConfigBase.cs" />
+    <Compile Include="Config\Background.cs" />
+    <Compile Include="Config\BackgroundFile.cs" />
+    <Compile Include="Config\IPCEFile.cs" />
+    <Compile Include="Config\MainWindow.cs" />
+    <Compile Include="Config\RAWFile.cs" />
+    <Compile Include="Config\PathConfigBase.cs" />
+    <Compile Include="Config\Position.cs" />
+    <Compile Include="Config\SpectrumWindow.cs" />
+    <Compile Include="Config\Time.cs" />
+    <Compile Include="Config\TXTFile.cs" />
+    <Compile Include="Config\Wavelength.cs" />
+    <Compile Include="Config\WindowConfigBase.cs" />
+    <Compile Include="Dialogs\SaveFileDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Spectrum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Spectrum.Designer.cs">
+      <DependentUpon>Spectrum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OpenFileDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Printing\CustomPrintCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Printing\CustomPrintCtrl.Designer.cs">
+      <DependentUpon>CustomPrintCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Wizards\AddRemoveSpectra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\AddRemoveSpectra.Designer.cs">
+      <DependentUpon>AddRemoveSpectra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\Export.Designer.cs">
+      <DependentUpon>Export.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Hardware.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\Hardware.Designer.cs">
+      <DependentUpon>Hardware.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewSpectrum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSpectrum.Designer.cs">
+      <DependentUpon>NewSpectrum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\Scaling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\Scaling.Designer.cs">
+      <DependentUpon>Scaling.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Resources\ContinueDataCollection.png" />
+    <None Include="Resources\PCLogo.png" />
+    <EmbeddedResource Include="Forms\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Spectrum.resx">
+      <DependentUpon>Spectrum.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Printing\CustomPrintCtrl.resx">
+      <DependentUpon>CustomPrintCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Wizards\AddRemoveSpectra.resx">
+      <DependentUpon>AddRemoveSpectra.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\Export.resx">
+      <DependentUpon>Export.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\Hardware.resx">
+      <DependentUpon>Hardware.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSpectrum.resx">
+      <DependentUpon>NewSpectrum.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\Scaling.resx">
+      <DependentUpon>Scaling.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\RDH2\trunk\RDH2.Instrumentation\RDH2.Instrumentation.csproj">
+      <Project>{17CD90F5-BB6A-4DC5-82E0-CAE7C5471508}</Project>
+      <Name>RDH2.Instrumentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\RDH2\trunk\RDH2.Utilities\RDH2.Utilities.csproj">
+      <Project>{F0A9386D-DE94-48E7-8447-BBC7682F3771}</Project>
+      <Name>RDH2.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PhotoCurrent.IO\PhotoCurrent.IO.csproj">
+      <Project>{5856DDD0-D6D9-48E2-9C8B-1FB7FB5AB825}</Project>
+      <Name>PhotoCurrent.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PhotoCurrent.Scaling\PhotoCurrent.Scaling.csproj">
+      <Project>{83316C8C-A9C9-4516-A8A9-64B3E172CE0E}</Project>
+      <Name>PhotoCurrent.Scaling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PCLogo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddSpectrum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewSpectrum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OpenSpectrum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PauseDataCollection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ResetZoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ScaleToIPCE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StopDataCollection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PCLogo.ico" />
+    <None Include="Resources\Export.png" />
+    <None Include="Resources\Autoscale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
